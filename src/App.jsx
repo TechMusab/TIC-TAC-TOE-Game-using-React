@@ -26,7 +26,7 @@ function App() {
     for (let b of board) {
       for (let c of b) {
         if (c === null) {
-          return setdraw(false);
+          return;
         }
       }
     }
@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     checkwin();
     checkdraw();
-  }, [board,winner]);
+  }, [board]);
   const handleclick = (rowindex, colindex) => {
     if (board[rowindex][colindex] || winner) return;
     const updatedboard = [...board.map((array) => [...array])];
@@ -76,7 +76,7 @@ function App() {
   return (
     <main>
       <div id="game-container">
-        {winner || draw && <Gameover winner={winner} handlerestart={handlerestart}></Gameover>}
+      {(winner || draw) && <Gameover winner={winner} handlerestart={handlerestart} />}
         <ol id="players" className="highlight-player">
           <Player name="Player 1" symbol="O" isActive={active === "O"}></Player>
           <Player name="Player 2" symbol="X" isActive={active === "X"}></Player>
